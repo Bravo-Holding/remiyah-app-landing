@@ -1,0 +1,16 @@
+# Internos — não publicar
+briefing.md
+CLAUDE.md
+contexto-titi.md
+contexto-amelia.md
+.claude/
+.DS_Store
+
+# Fontes de arte (não vão pro deploy; só os assets finais gerados vão)
+banner.png
+*.psd
+*.fig
+
+# Conteúdo-base interno (riscos operacionais §12) — não publicar
+conteudo-landing-page.md
+referencia/
