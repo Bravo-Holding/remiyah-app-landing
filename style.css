@@ -10,7 +10,217 @@
   font-weight: 600;
   font-size: clamp(1.8rem, 4vw, 2.8rem);
   line-height: 1.1;
+  letter-spacing: -.02em;
+  text-wrap: balance;
   margin-bottom: 1.25rem;
+}
+
+.section > [class^="container"] > .label {
+  margin-bottom: .875rem;
+}
+
+/* Ícones Lucide inline (traço fino, cor herdada) */
+.icon {
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ===== Dor ===== */
+.pain-list {
+  list-style: none;
+  margin-top: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.pain-item {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 1rem;
+  padding-block: 1.125rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted-foreground);
+}
+
+/* Ícones da dor ficam neutros: dor não carrega cor de significado */
+.pain-item .icon {
+  margin-top: .2rem;
+  color: var(--muted-foreground);
+}
+
+.pain-item strong {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.pain-close {
+  margin-top: 2rem;
+  font-size: clamp(1.15rem, 2.6vw, 1.35rem);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -.01em;
+  color: var(--foreground);
+  text-wrap: balance;
+}
+
+/* ===== Para quem ===== */
+.fit-list {
+  list-style: none;
+  margin-top: 1.75rem;
+  padding: .5rem 1.25rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.fit-item {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: .875rem;
+  padding-block: 1rem;
+}
+
+.fit-item + .fit-item {
+  border-top: 1px solid var(--border);
+}
+
+.fit-item .icon {
+  margin-top: .2rem;
+  color: var(--muted-foreground);
+}
+
+/* ===== Método ===== */
+.pieces {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  margin-top: 2rem;
+}
+
+.piece {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.piece-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  color: var(--muted-foreground);
+}
+
+.piece-num {
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+.piece-title {
+  margin-top: .125rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  line-height: 1.3;
+}
+
+.piece-text {
+  margin-top: .375rem;
+  font-size: .98rem;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+
+/* Tabela da nota: 2 colunas cabem em 390px sem scroll horizontal */
+.score-card {
+  margin-top: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.score-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .95rem;
+  line-height: 1.45;
+}
+
+.score-table th {
+  padding: .75rem 1rem;
+  text-align: left;
+  font-size: .75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--muted-foreground);
+  background: var(--card);
+}
+
+.score-table td {
+  padding: .875rem 1rem;
+  border-top: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.score-table th:last-child,
+.score-table td:last-child {
+  width: 1%;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Pílula da nota: faixa acima de 80% good · 50 a 80% mid · abaixo de 50% bad */
+.score-pill {
+  display: inline-block;
+  min-width: 3.75rem;
+  padding: .3rem .625rem;
+  border: 1px solid;
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: .85rem;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+}
+
+.score-pill--good {
+  background: var(--good-bg);
+  border-color: var(--good-border);
+  color: var(--good-fg);
+}
+
+.score-pill--mid {
+  background: var(--mid-bg);
+  border-color: var(--mid-border);
+  color: var(--mid-fg);
+}
+
+.score-pill--bad {
+  background: var(--bad-bg);
+  border-color: var(--bad-border);
+  color: var(--bad-fg);
+}
+
+.method-highlight {
+  margin-top: 2rem;
+  font-size: clamp(1.3rem, 3.2vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -.02em;
+  text-wrap: balance;
 }
 
 .section-body {
