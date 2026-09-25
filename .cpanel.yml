@@ -1,0 +1,12 @@
+---
+# Deploy: cPanel Git Version Control roda este arquivo no "Deploy HEAD Commit".
+# CRÍTICO: liste TODOS os assets no cp, INCLUSIVE imagens (og-image, fotos).
+# O que não estiver aqui não vai pra produção.
+# $HOME evita expor o usuário cPanel no repo público.
+# [DEFINIR] domínio/path. Padrão das landings: ebravoholding.com/pages/«slug»/«vN»/
+# [PENDENTE] acrescentar og-image.jpg ao cp quando o arquivo existir (cp de arquivo ausente quebra o deploy).
+deployment:
+  tasks:
+    - export DEPLOYPATH="$HOME/«dominio»/«path»/v1/"
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/cp -R index.html style.css favicon $DEPLOYPATH

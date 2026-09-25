@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remiyah · Multiplique o que foi confiado a você</title>
+  <meta name="description" content="App de execução pessoal inspirado na Parábola dos Talentos. 3 compromissos por dia e nota diária em %. Gratuito por tempo limitado.">
+  <meta property="og:title" content="Remiyah · Multiplique o que foi confiado a você">
+  <meta property="og:description" content="App de execução pessoal inspirado na Parábola dos Talentos. 3 compromissos por dia e nota diária em %. Gratuito por tempo limitado.">
+  <meta property="og:type" content="website">
+  <!-- [DEFINIR] og:url (URL pública absoluta) e [PENDENTE] og-image.jpg 1200x630 < 300KB. Descomentar quando existirem.
+  <meta property="og:url" content="«URL pública absoluta»">
+  <meta property="og:image" content="«URL absoluta da og-image.jpg»">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Remiyah, app de execução pessoal">
+  <meta name="twitter:image" content="«URL absoluta da og-image.jpg»">
+  -->
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg">
+  <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="manifest" href="favicon/site.webmanifest">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="color-scheme" content="dark">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500;600&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500;600&display=swap"
+    rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet" />
+  </noscript>
+
+  <!-- ===== CSS CRÍTICO (above-the-fold + compartilhado). NÃO mover pro style.css ===== -->
+  <style>
+    :root {
+      /* === DESIGN TOKENS (espelho de CLAUDE.md › IDENTIDADE VISUAL; valores do app, tema escuro) === */
+      --background: #0a0a0a;
+      --foreground: #fafafa;
+      --card: #171717;
+      --muted: #262626;
+      --muted-foreground: #a1a1a1;
+      --border: rgba(255, 255, 255, .18);
+      --primary: #e5e5e5;
+      --primary-foreground: #171717;
+      --brand: #d4af37;
+
+      /* CTA: trocar para var(--primary) / var(--primary-foreground) volta ao neutro do app */
+      --cta-bg: var(--brand);
+      --cta-fg: #0a0a0a;
+
+      /* Faixas da nota (Tailwind 950 / 900 / 300) */
+      --good-bg: #022c22;
+      --good-border: #064e3b;
+      --good-fg: #6ee7b7;
+      --mid-bg: #451a03;
+      --mid-border: #78350f;
+      --mid-fg: #fcd34d;
+      --bad-bg: #4c0519;
+      --bad-border: #881337;
+      --bad-fg: #fda4af;
+
+      /* Talentos de exemplo nos mockups */
+      --talent-familia: #ec4899;
+      --talent-empresa: #0ea5e9;
+      --talent-saude: #10b981;
+      --talent-ministerio: #f59e0b;
+
+      --font-body: 'Geist', system-ui, sans-serif;
+      --font-display: 'Geist', system-ui, sans-serif;
+      --font-mono: 'Geist Mono', ui-monospace, monospace;
+      --font-serif: Georgia, 'Times New Roman', serif;
+
+      --space-sm: 1rem;
+      --space-md: 2rem;
+      --space-lg: 4rem;
+      --space-xl: 6rem;
+
+      --radius: .625rem;
+      --radius-full: 9999px;
+      --shadow-cta: 0 4px 16px rgba(212, 175, 55, .18);
+      --transition: 150ms ease;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--background);
+      color: var(--foreground);
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin-inline: auto;
+      padding-inline: 1.25rem;
+    }
+
+    .container--narrow {
+      max-width: 720px;
+      margin-inline: auto;
+      padding-inline: 1.25rem;
+    }
+
+    .section {
+      padding-block: var(--space-lg);
+    }
+
+    .section--xl {
+      padding-block: var(--space-xl);
+    }
+
+    .text-brand {
+      color: var(--brand);
+    }
+
+    /* Rótulo de seção (caixa-alta pequena, cinza, espaçada) */
+    .label {
+      font-size: .75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted-foreground);
+    }
+
+    /* CTA principal: 56px, pílula, única sombra da página */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      background: var(--cta-bg);
+      color: var(--cta-fg);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 1.05rem;
+      padding: 0 2rem;
+      min-height: 56px;
+      border-radius: var(--radius-full);
+      border: none;
+      box-shadow: var(--shadow-cta);
+      cursor: pointer;
+      text-decoration: none;
+      line-height: 1.2;
+      transition: filter var(--transition), transform var(--transition);
+    }
+
+    .btn:hover {
+      filter: brightness(1.06);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn--full {
+      width: 100%;
+    }
+
+    /* Fade-up on scroll: curto (≤200ms, 8px) */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    /* Foco visível para teclado (links e botões da página toda) */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 3px;
+    }
+
+    /* Header fixo e discreto. scroll-padding evita que as âncoras fiquem atrás dele */
+    html {
+      scroll-padding-top: 4.5rem;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: var(--background);
+      background: color-mix(in srgb, var(--background) 82%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 60px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: .625rem;
+      min-height: 44px;
+      color: var(--foreground);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: -.01em;
+    }
+
+    /* Ícone do app: quadrado escuro raio ~19%, "R" Georgia bold dourado. Borda fina para destacar do fundo */
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 19%;
+      background: var(--background);
+      border: 1px solid var(--border);
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.2rem;
+      line-height: 1;
+      color: var(--brand);
+    }
+
+    .header-login {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 1.125rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full);
+      color: var(--foreground);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: .95rem;
+      transition: background-color var(--transition);
+    }
+
+    .header-login:hover {
+      background: var(--muted);
+    }
+
+    /* Hero (above the fold) */
+    #hero {
+      padding-block: 2.5rem 3.5rem;
+    }
+
+    @media (min-width: 768px) {
+      #hero {
+        padding-block: 4.5rem 5rem;
+      }
+    }
+
+    .hero-copy .label {
+      margin-bottom: 1rem;
+    }
+
+    .hero-h1 {
+      text-wrap: balance;
+    }
+
+    .hero-note {
+      text-wrap: pretty;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .hero-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-lg);
+      }
+    }
+
+    .hero-h1 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      letter-spacing: -.03em;
+      font-size: clamp(2.2rem, 6vw, 3.75rem);
+      line-height: 1.05;
+    }
+
+    .hero-sub {
+      margin-top: 1rem;
+      font-size: 1.05rem;
+      color: var(--muted-foreground);
+      max-width: 480px;
+    }
+
+    .hero-cta {
+      margin-top: 1.75rem;
+    }
+
+    /* No celular o botão ocupa a largura toda (alvo de polegar) */
+    .hero-cta .btn {
+      width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      .hero-cta .btn {
+        width: auto;
+      }
+    }
+
+    .hero-note {
+      margin-top: .875rem;
+      font-size: .85rem;
+      line-height: 1.5;
+      color: var(--muted-foreground);
+    }
+
+    /* ===== Mockup da tela Hoje (decorativo, aria-hidden) ===== */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+    }
+
+    .phone {
+      width: 100%;
+      max-width: 300px;
+      aspect-ratio: 300 / 620;
+      padding: 8px;
+      border-radius: 46px;
+      background: var(--card);
+      border: 1px solid var(--border);
+    }
+
+    .phone-screen {
+      position: relative;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 38px;
+      background: var(--background);
+      padding: 0 14px;
+      font-family: var(--font-body);
+      color: var(--foreground);
+    }
+
+    .phone svg {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .phone-island {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 84px;
+      height: 24px;
+      border-radius: var(--radius-full);
+      background: var(--card);
+    }
+
+    .m-status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 44px;
+      padding: 0 8px 0 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .m-status-icons {
+      display: flex;
+      gap: 4px;
+    }
+
+    .m-status svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .m-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .m-title {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -.02em;
+      line-height: 1.15;
+    }
+
+    .m-date {
+      margin-top: 2px;
+      font-size: 12px;
+      color: var(--muted-foreground);
+    }
+
+    /* Pílula da nota do dia: faixa verde (acima de 80%) */
+    .m-pill {
+      flex-shrink: 0;
+      margin-top: 2px;
+      padding: 6px 10px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--good-border);
+      background: var(--good-bg);
+      color: var(--good-fg);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .m-talents {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 16px;
+    }
+
+    .m-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 8px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full);
+      font-size: 10.5px;
+      line-height: 1;
+      color: var(--muted-foreground);
+      white-space: nowrap;
+    }
+
+    /* --c recebe um token --talent-* no HTML */
+    .m-dot {
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--c);
+    }
+
+    .m-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 20px 0 10px;
+    }
+
+    .m-label {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted-foreground);
+    }
+
+    .m-count {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted-foreground);
+    }
+
+    .m-tasks {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Linha de tarefa: borda esquerda de 3px na cor do talento */
+    .m-task {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px 10px 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--c);
+      border-radius: var(--radius);
+    }
+
+    .m-check {
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      color: var(--foreground);
+    }
+
+    .m-check svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .m-task.is-done .m-check {
+      background: color-mix(in srgb, var(--primary) 10%, transparent);
+    }
+
+    .m-task-body {
+      min-width: 0;
+    }
+
+    .m-task-title {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    .m-task.is-done .m-task-title {
+      color: var(--muted-foreground);
+      text-decoration: line-through;
+      text-decoration-color: var(--muted-foreground);
+    }
+
+    .m-task-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 6px;
+    }
+
+    .m-task-meta .m-chip {
+      padding: 3px 7px;
+      font-size: 10px;
+    }
+
+    .m-fab {
+      position: absolute;
+      right: 14px;
+      bottom: 78px;
+      display: grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--primary-foreground);
+    }
+
+    .m-fab svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .m-nav {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 8px 8px 20px;
+      border-top: 1px solid var(--border);
+      background: var(--background);
+    }
+
+    .m-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      font-size: 9.5px;
+      color: var(--muted-foreground);
+    }
+
+    .m-nav-item.is-active {
+      color: var(--foreground);
+    }
+
+    .m-nav-item svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Sticky CTA (mobile) */
+    .sticky-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .75rem 1rem;
+      background: rgba(10, 10, 10, .85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+      color: var(--foreground);
+      transform: translateY(110%);
+      transition: transform .2s ease;
+    }
+
+    .sticky-bar.show {
+      transform: none;
+    }
+
+    @media (min-width: 768px) {
+      .sticky-bar {
+        display: none;
+      }
+    }
+
+    .sticky-bar-text {
+      font-size: .85rem;
+      line-height: 1.3;
+      color: var(--muted-foreground);
+    }
+
+    .sticky-bar-text strong {
+      color: var(--foreground);
+      font-weight: 600;
+    }
+
+    .sticky-bar .btn {
+      flex-shrink: 0;
+      padding: 0 1.5rem;
+    }
+  </style>
+
+  <!-- CSS não-crítico (abaixo do fold) · carregado de forma não-bloqueante -->
+  <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="style.css" />
+  </noscript>
+
+  <!-- [DEFINIR] Meta Pixel/GTM: snippet entra aqui (adiado pós-LCP, padrão do kit) quando o Ewertton decidir o ID.
+       Evento sugerido: Lead no clique de [data-app-link]. -->
+</head>
+
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#hero" class="brand" aria-label="Remiyah, voltar ao topo">
+        <span class="brand-mark" aria-hidden="true">R</span>
+        <span>Remiyah</span>
+      </a>
+      <a href="https://remiyah-app.netlify.app" class="header-login" data-app-link>Entrar</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <!-- [NOTA] Headline B para teste A/B (versão v2): "Servo bom multiplica. Servo mau enterra." -->
+    <section id="hero" class="section--xl" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <p class="label">Inspirado na Parábola dos Talentos · Mateus&nbsp;25</p>
+            <h1 id="hero-title" class="hero-h1"><span class="text-brand">Multiplique</span> o que foi confiado a você.</h1>
+            <p class="hero-sub">O Remiyah é um app de execução pessoal. Você define 3 compromissos por dia, fecha o dia com uma nota em % e vê qual área da sua vida está multiplicando e qual está enterrada.</p>
+            <div class="hero-cta">
+              <a href="https://remiyah-app.netlify.app" class="btn" data-app-link>Começar grátis</a>
+              <p class="hero-note">Gratuito por tempo limitado · Entre com o Google · iPhone, Android e computador</p>
+            </div>
+          </div>
+
+          <!-- Mockup HTML/CSS da tela Hoje. [PENDENTE] trocar por print real (modo escuro) quando existir -->
+          <div class="hero-visual" aria-hidden="true">
+            <div class="phone">
+              <div class="phone-screen">
+                <span class="phone-island"></span>
+                <div class="m-status">
+                  <span>9:41</span>
+                  <span class="m-status-icons">
+                    <svg viewBox="0 0 24 24"><path d="M12 20h.01" /><path d="M2 8.82a15 15 0 0 1 20 0" /><path d="M5 12.859a10 10 0 0 1 14 0" /><path d="M8.5 16.429a5 5 0 0 1 7 0" /></svg>
+                    <svg viewBox="0 0 24 24"><rect width="16" height="10" x="2" y="7" rx="2" ry="2" /><line x1="22" x2="22" y1="11" y2="13" /><line x1="6" x2="6" y1="11" y2="13" /><line x1="10" x2="10" y1="11" y2="13" /><line x1="14" x2="14" y1="11" y2="13" /></svg>
+                  </span>
+                </div>
+
+                <div class="m-head">
+                  <div>
+                    <div class="m-title">Hoje</div>
+                    <div class="m-date">Sexta, 25 de setembro</div>
+                  </div>
+                  <span class="m-pill">87%</span>
+                </div>
+
+                <div class="m-talents">
+                  <span class="m-chip"><span class="m-dot" style="--c: var(--talent-familia)"></span>Família</span>
+                  <span class="m-chip"><span class="m-dot" style="--c: var(--talent-empresa)"></span>Empresa</span>
+                  <span class="m-chip"><span class="m-dot" style="--c: var(--talent-saude)"></span>Saúde</span>
+                  <span class="m-chip"><span class="m-dot" style="--c: var(--talent-ministerio)"></span>Ministério</span>
+                </div>
+
+                <div class="m-section">
+                  <span class="m-label">A Trindade</span>
+                  <span class="m-count">2/3</span>
+                </div>
+
+                <ul class="m-tasks">
+                  <li class="m-task is-done" style="--c: var(--talent-familia)">
+                    <span class="m-check"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" /></svg></span>
+                    <div class="m-task-body">
+                      <div class="m-task-title">Culto com a família</div>
+                      <div class="m-task-meta">
+                        <span class="m-chip"><span class="m-dot"></span>Família</span>
+                        <span class="m-chip">@casa</span>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="m-task" style="--c: var(--talent-empresa)">
+                    <span class="m-check"></span>
+                    <div class="m-task-body">
+                      <div class="m-task-title">Proposta do cliente</div>
+                      <div class="m-task-meta">
+                        <span class="m-chip"><span class="m-dot"></span>Empresa</span>
+                        <span class="m-chip">@computador</span>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="m-task is-done" style="--c: var(--talent-saude)">
+                    <span class="m-check"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" /></svg></span>
+                    <div class="m-task-body">
+                      <div class="m-task-title">Treino de 30 min</div>
+                      <div class="m-task-meta">
+                        <span class="m-chip"><span class="m-dot"></span>Saúde</span>
+                        <span class="m-chip">@rua</span>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+
+                <span class="m-fab"><svg viewBox="0 0 24 24"><path d="M5 12h14" /><path d="M12 5v14" /></svg></span>
+
+                <nav class="m-nav">
+                  <span class="m-nav-item is-active">
+                    <svg viewBox="0 0 24 24"><path d="M8 2v4" /><path d="M16 2v4" /><rect width="18" height="18" x="3" y="4" rx="2" /><path d="M3 10h18" /><path d="m9 16 2 2 4-4" /></svg>
+                    Hoje
+                  </span>
+                  <span class="m-nav-item">
+                    <svg viewBox="0 0 24 24"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12" /><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" /></svg>
+                    Surrão
+                  </span>
+                  <span class="m-nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z" /><path d="M8 10v4" /><path d="M12 10v2" /><path d="M16 10v6" /></svg>
+                    Projetos
+                  </span>
+                  <span class="m-nav-item">
+                    <svg viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>
+                    Mais
+                  </span>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== DOR ===== (fatia 2) -->
+
+    <!-- ===== PARA-QUEM ===== (fatia 2) -->
+
+    <!-- ===== METODO ===== (fatia 2) -->
+
+    <!-- ===== DIA ===== (fatia 3) -->
+
+    <!-- ===== MULTIPLICACAO ===== (fatia 3) -->
+
+    <!-- ===== RECURSOS ===== (fatia 4) -->
+
+    <!-- ===== COMPARATIVO ===== (fatia 4) -->
+
+    <!-- ===== PROVA ===== (fatia 5 · fica comentada até existir prova social real) -->
+
+    <!-- ===== OFERTA ===== (fatia 5) -->
+
+    <!-- ===== FAQ ===== (fatia 5) -->
+
+    <!-- ===== CTA-FINAL ===== (fatia 5) -->
+
+  </main>
+
+  <!-- ===== FOOTER ===== (fatia 5) -->
+
+  <!-- ===== STICKY CTA (mobile) ===== -->
+  <div class="sticky-bar" role="complementary" aria-label="Chamada para ação fixa">
+    <p class="sticky-bar-text"><strong>Remiyah</strong> · grátis por tempo limitado</p>
+    <a href="https://remiyah-app.netlify.app" class="btn" data-app-link>Começar grátis</a>
+  </div>
+
+  <!-- ===== JS ===== -->
+  <script>
+    // Fade-up on scroll
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.fade-up').forEach((el) => obs.observe(el));
+    })();
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const item = this.closest('.faq-item');
+        const open = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach((o) => {
+          o.classList.remove('open');
+          o.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        if (!open) { item.classList.add('open'); this.setAttribute('aria-expanded', 'true'); }
+      });
+    });
+
+    // Sticky bar após scroll
+    (function () {
+      const bar = document.querySelector('.sticky-bar');
+      if (!bar) return;
+      let shown = false;
+      const onScroll = () => {
+        if (!shown && window.scrollY > 400) { bar.classList.add('show'); shown = true; window.removeEventListener('scroll', onScroll); }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+
+    // Smooth scroll para âncoras
+    document.querySelectorAll('a[href^="#"]').forEach((a) => {
+      a.addEventListener('click', function (e) {
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+  </script>
+
+  <!-- UTM: repassa os utm_* da URL da página para todo link do app -->
+  <script>
+    (function () {
+      var params = new URLSearchParams(location.search);
+      var utm = [];
+      params.forEach(function (v, k) { if (k.indexOf('utm_') === 0) utm.push([k, v]); });
+      if (!utm.length) return;
+      document.querySelectorAll('a[data-app-link]').forEach(function (a) {
+        var u = new URL(a.href);
+        utm.forEach(function (p) { if (!u.searchParams.has(p[0])) u.searchParams.set(p[0], p[1]); });
+        a.href = u.toString();
+      });
+    })();
+  </script>
+</body>
+
+</html>
