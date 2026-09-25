@@ -318,6 +318,17 @@
       line-height: 1.05;
     }
 
+    /* ≥768px: 2 linhas, "Multiplique o que foi" / "confiado a você."
+       A 1ª linha mede ~9.1em; a fonte é limitada para caber na coluna do grid.
+       text-wrap volta ao normal porque balance quebraria depois de "que". */
+    @media (min-width: 768px) {
+      .hero-h1 {
+        font-size: min(4.6vw, 3.3rem);
+        max-width: 9.6em;
+        text-wrap: wrap;
+      }
+    }
+
     .hero-sub {
       margin-top: 1rem;
       font-size: 1.05rem;
@@ -918,9 +929,107 @@
       </div>
     </section>
 
-    <!-- ===== DIA ===== (fatia 3) -->
+    <!-- ===== DIA ===== -->
+    <!-- [PENDENTE] Trocar/complementar a linha do tempo pelos prints reais (Abertura, Hoje, Fechamento com nota) quando existirem -->
+    <section id="dia" class="section" aria-labelledby="dia-title">
+      <div class="container--narrow">
+        <p class="label fade-up">SEU DIA COM O REMIYAH</p>
+        <h2 id="dia-title" class="section-title fade-up">60 segundos de manhã. 3 para anotar. 90 à noite.</h2>
 
-    <!-- ===== MULTIPLICACAO ===== (fatia 3) -->
+        <ol class="timeline">
+          <li class="tl-item fade-up">
+            <span class="tl-marker"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v8" /><path d="m4.93 10.93 1.41 1.41" /><path d="M2 18h2" /><path d="M20 18h2" /><path d="m19.07 10.93-1.41 1.41" /><path d="M22 22H2" /><path d="m8 6 4-4 4 4" /><path d="M16 18a4 4 0 0 0-8 0" /></svg></span>
+            <div>
+              <h3 class="tl-moment">Manhã</h3>
+              <p class="tl-time"><strong>Menos de <span class="num">60</span> segundos.</strong></p>
+              <p class="tl-text">Você abre o dia, escolhe a Trindade e, se quiser, puxa tarefas extras.</p>
+            </div>
+          </li>
+          <li class="tl-item fade-up">
+            <span class="tl-marker"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" /></svg></span>
+            <div>
+              <h3 class="tl-moment">Durante o dia</h3>
+              <p class="tl-time"><strong>Menos de <span class="num">3</span> segundos.</strong></p>
+              <p class="tl-text">Anota tudo que aparecer direto da tela inicial do celular. Executa em modo foco, com cronômetro.</p>
+            </div>
+          </li>
+          <li class="tl-item fade-up">
+            <span class="tl-marker"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg></span>
+            <div>
+              <h3 class="tl-moment">Noite</h3>
+              <p class="tl-time"><strong>Menos de <span class="num">90</span> segundos.</strong></p>
+              <p class="tl-text">Marca o que cumpriu, escreve uma reflexão se quiser e recebe a nota do dia.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== MULTIPLICACAO ===== -->
+    <!-- [PENDENTE] Trocar o mockup pelo print real do painel de Multiplicação e da tela de Conquistas quando existirem -->
+    <section id="multiplicacao" class="section" aria-labelledby="multiplicacao-title">
+      <div class="container--narrow">
+        <p class="label fade-up">MULTIPLICAÇÃO</p>
+        <h2 id="multiplicacao-title" class="section-title fade-up">Veja qual talento está multiplicando e qual está enterrado</h2>
+        <p class="section-body fade-up">O painel mostra o % de entrega de cada talento em 7, 30 ou 90 dias. Nenhuma área da sua vida fica parada sem você perceber.</p>
+
+        <div class="mx-stage">
+          <ul class="bands fade-up">
+            <li><span class="band-dot" style="--band: var(--good-fg)" aria-hidden="true"></span>Verde · acima de 80% · multiplicando</li>
+            <li><span class="band-dot" style="--band: var(--mid-fg)" aria-hidden="true"></span>Amarelo · de 50% a 80% · atenção</li>
+            <li><span class="band-dot" style="--band: var(--bad-fg)" aria-hidden="true"></span>Vermelho · abaixo de 50% · talento enterrado</li>
+          </ul>
+
+          <!-- Mockup do painel de Multiplicação (valores decorativos cobrindo as 3 faixas) -->
+          <div class="mx-panel fade-up" aria-hidden="true">
+            <div class="mx-head">
+              <span class="mx-title">Multiplicação</span>
+              <span class="mx-period">
+                <span class="mx-seg"><span>7</span><span class="is-active">30</span><span>90</span></span>
+                <span>dias</span>
+              </span>
+            </div>
+            <ul class="mx-rows">
+              <li class="mx-row" style="--c: var(--talent-familia); --v: 92%; --band: var(--good-fg)">
+                <div class="mx-row-top"><span class="mx-name"><span class="m-dot"></span>Família</span><span class="mx-pct">92%</span></div>
+                <div class="mx-bar"><span class="mx-fill"></span></div>
+              </li>
+              <li class="mx-row" style="--c: var(--talent-empresa); --v: 84%; --band: var(--good-fg)">
+                <div class="mx-row-top"><span class="mx-name"><span class="m-dot"></span>Empresa</span><span class="mx-pct">84%</span></div>
+                <div class="mx-bar"><span class="mx-fill"></span></div>
+              </li>
+              <li class="mx-row" style="--c: var(--talent-ministerio); --v: 61%; --band: var(--mid-fg)">
+                <div class="mx-row-top"><span class="mx-name"><span class="m-dot"></span>Ministério</span><span class="mx-pct">61%</span></div>
+                <div class="mx-bar"><span class="mx-fill"></span></div>
+              </li>
+              <li class="mx-row" style="--c: var(--talent-saude); --v: 38%; --band: var(--bad-fg)">
+                <div class="mx-row-top"><span class="mx-name"><span class="m-dot"></span>Saúde</span><span class="mx-pct">38%</span></div>
+                <div class="mx-bar"><span class="mx-fill"></span></div>
+              </li>
+            </ul>
+          </div>
+
+          <ul class="msgs">
+            <li class="msg fade-up">"Há 12 dias sem cultivar Saúde. Não o enterre."</li>
+            <li class="msg fade-up">"7 dias seguidos. Talento rende juros."</li>
+            <li class="msg fade-up">"Ontem pulou. Hoje abre."</li>
+          </ul>
+        </div>
+
+        <h3 class="label ach-label fade-up">Conquistas</h3>
+        <ul class="achievements">
+          <li class="ach fade-up">
+            <span class="ach-icon"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526" /><circle cx="12" cy="8" r="6" /></svg></span>
+            <p><strong>Servo Fiel:</strong> 7 dias seguidos com nota acima de 70%.</p>
+          </li>
+          <li class="ach fade-up">
+            <span class="ach-icon"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" /><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" /><path d="M4 22h16" /><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" /><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" /><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" /></svg></span>
+            <p><strong>Multiplicador:</strong> um mês com média de 60% ou mais.</p>
+          </li>
+        </ul>
+        <p class="ach-note fade-up">Uma vez desbloqueadas, ficam para sempre.</p>
+      </div>
+    </section>
 
     <!-- ===== RECURSOS ===== (fatia 4) -->
 
