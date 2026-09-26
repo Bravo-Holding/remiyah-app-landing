@@ -511,6 +511,14 @@
   color: var(--muted-foreground);
 }
 
+/* Container intermediário (960px): grade de recursos e tabela do comparativo,
+   perto do alinhamento das seções em .container--narrow */
+.container--mid {
+  max-width: 960px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
 /* ===== Recursos ===== */
 .features {
   list-style: none;
