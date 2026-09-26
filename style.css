@@ -511,6 +511,185 @@
   color: var(--muted-foreground);
 }
 
+/* ===== Recursos ===== */
+.features {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .75rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .features {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.feature {
+  padding: 1.25rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* Ícone na cor cheia dentro de círculo com a mesma cor a 15% (padrão do tour do app) */
+.feature-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--c) 15%, transparent);
+  color: var(--c);
+}
+
+.feature-title {
+  margin-top: 1rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  line-height: 1.3;
+}
+
+.feature-text {
+  margin-top: .375rem;
+  font-size: .95rem;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+
+/* ===== Comparativo ===== */
+.cmp {
+  width: 100%;
+  margin-top: 2rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: .95rem;
+  line-height: 1.45;
+}
+
+/* Desktop: tabela; coluna Remiyah com fundo card e borda dourada (único dourado da seção) */
+@media (min-width: 768px) {
+  .cmp th,
+  .cmp td {
+    padding: .875rem 1rem;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .cmp thead th {
+    font-size: .75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--muted-foreground);
+  }
+
+  .cmp tbody th,
+  .cmp tbody td {
+    border-top: 1px solid var(--border);
+  }
+
+  .cmp tbody th {
+    font-weight: 500;
+    color: var(--foreground);
+  }
+
+  .cmp td {
+    color: var(--muted-foreground);
+  }
+
+  .cmp .is-remiyah {
+    background: var(--card);
+    border-left: 1px solid var(--brand);
+    border-right: 1px solid var(--brand);
+    color: var(--foreground);
+    font-weight: 600;
+  }
+
+  .cmp thead .is-remiyah {
+    border-top: 1px solid var(--brand);
+    border-radius: var(--radius) var(--radius) 0 0;
+    font-size: .95rem;
+    text-transform: none;
+    letter-spacing: -.01em;
+  }
+
+  .cmp tbody tr:last-child .is-remiyah {
+    border-bottom: 1px solid var(--brand);
+    border-radius: 0 0 var(--radius) var(--radius);
+  }
+}
+
+/* Celular: um card por critério, com todas as células visíveis */
+@media (max-width: 767px) {
+  .cmp,
+  .cmp tbody,
+  .cmp tr,
+  .cmp th,
+  .cmp td {
+    display: block;
+  }
+
+  .cmp thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .cmp tbody {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+  }
+
+  .cmp tr {
+    padding: 1rem 1.125rem 1.125rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .cmp tbody th {
+    text-align: left;
+    margin-bottom: .375rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--foreground);
+  }
+
+  .cmp td {
+    padding-block: .5rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted-foreground);
+  }
+
+  .cmp td::before {
+    content: attr(data-label) " · ";
+  }
+
+  .cmp td.is-remiyah {
+    margin-top: .375rem;
+    padding: .625rem .75rem;
+    border-top: 0;
+    border-left: 2px solid var(--brand);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    background: var(--muted);
+    color: var(--foreground);
+    font-weight: 600;
+  }
+}
+
 /* ===== FAQ (accordion) ===== */
 .faq-headline {
   font-family: var(--font-display);
