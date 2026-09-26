@@ -1160,17 +1160,193 @@
       </div>
     </section>
 
-    <!-- ===== PROVA ===== (fatia 5 · fica comentada até existir prova social real) -->
+    <!-- ===== PROVA ===== -->
+    <!-- [PENDENTE] Hoje não existe prova social pública (§10). Seção fica comentada no HTML até haver material real.
+         Material a coletar, em ordem de força:
+           1. Depoimentos de 3 a 5 usuários beta, com resultado concreto (ex. de formato: "fechei 21 dias seguidos acima de 70%").
+           2. Histórico de uso do próprio Ewertton como fundador: dias fechados, talentos multiplicados. [FALTA NA ORIGEM] números.
+           3. Vídeo de 30 a 60 s do ciclo: capturar, abrir o dia, modo foco, fechar com nota.
+         Título quando existir: [FALTA NA ORIGEM]
+         Proibido fabricar depoimento. Não rodar tráfego pago com depoimento que não seja real (CONAR/CDC).
+    -->
 
-    <!-- ===== OFERTA ===== (fatia 5) -->
+    <!-- ===== OFERTA ===== -->
+    <section id="oferta" class="section" aria-labelledby="oferta-title">
+      <div class="container--narrow">
+        <p class="label fade-up">SEU ACESSO</p>
+        <h2 id="oferta-title" class="section-title fade-up">O Remiyah está gratuito por tempo limitado</h2>
+        <div class="offer-card fade-up">
+          <ul class="offer-list">
+            <li class="offer-item">
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+              <span>App completo no iPhone, Android e computador</span>
+            </li>
+            <li class="offer-item">
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+              <span>Talentos, Trindade, nota do dia e painel de multiplicação</span>
+            </li>
+            <li class="offer-item">
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+              <span>Modo foco, projetos, contextos e tarefas repetidas</span>
+            </li>
+            <li class="offer-item">
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+              <span>Funciona offline e sincroniza entre aparelhos</span>
+            </li>
+          </ul>
 
-    <!-- ===== FAQ ===== (fatia 5) -->
+          <h3 class="label offer-steps-label">Como começar</h3>
+          <ol class="steps">
+            <li class="step"><span class="step-num" aria-hidden="true">1</span><p>Toque em <strong>Começar grátis</strong>.</p></li>
+            <li class="step"><span class="step-num" aria-hidden="true">2</span><p>Entre com sua conta Google.</p></li>
+            <!-- [PENDENTE] link ou vídeo curto do "Adicionar à tela inicial" no iPhone e no Android (§12.4) -->
+            <li class="step"><span class="step-num" aria-hidden="true">3</span><p>Adicione o Remiyah à tela inicial do celular.</p></li>
+          </ol>
 
-    <!-- ===== CTA-FINAL ===== (fatia 5) -->
+          <div class="offer-cta">
+            <a href="https://remiyah-app.netlify.app" class="btn" data-app-link>Começar grátis</a>
+            <p class="offer-note">Sem cartão. Sem formulário. Só a sua conta Google.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <!-- [DEFINIR] "E quando deixar de ser grátis?" Não publicar até definir o que acontece com quem já usa. -->
+    <section id="faq" class="section" aria-labelledby="faq-title">
+      <div class="container--narrow">
+        <!-- [FALTA NA ORIGEM] título do FAQ -->
+        <h2 id="faq-title" class="label fade-up">PERGUNTAS FREQUENTES</h2>
+        <div class="faq-list fade-up" role="list">
+          <!-- FAQ 1: [DEFINIR] tom final (§9). -->
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" id="faq-q1" aria-expanded="false" aria-controls="faq-1">
+              <span>Preciso ser cristão para usar?</span>
+              <svg class="faq-chevron icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </button>
+            <div id="faq-1" class="faq-answer" role="region" aria-labelledby="faq-q1">
+              <p>O Remiyah é inspirado na Parábola dos Talentos e usa linguagem bíblica, como servo fiel e talento enterrado. A mecânica funciona para qualquer pessoa, mas o app foi feito para quem se identifica com esse fundamento.</p>
+            </div>
+          </div>
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" id="faq-q2" aria-expanded="false" aria-controls="faq-2">
+              <span>Tem na App Store ou no Google Play?</span>
+              <svg class="faq-chevron icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </button>
+            <div id="faq-2" class="faq-answer" role="region" aria-labelledby="faq-q2">
+              <p>Não. É um app instalável pelo navegador: você abre o link e adiciona à tela inicial. Ele fica com ícone próprio e abre em tela cheia, como um app da loja.</p>
+            </div>
+          </div>
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" id="faq-q3" aria-expanded="false" aria-controls="faq-3">
+              <span>Funciona sem internet?</span>
+              <svg class="faq-chevron icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </button>
+            <div id="faq-3" class="faq-answer" role="region" aria-labelledby="faq-q3">
+              <p>Sim. Tudo funciona offline e sincroniza quando a conexão volta.</p>
+            </div>
+          </div>
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" id="faq-q4" aria-expanded="false" aria-controls="faq-4">
+              <span>Funciona no computador?</span>
+              <svg class="faq-chevron icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </button>
+            <div id="faq-4" class="faq-answer" role="region" aria-labelledby="faq-q4">
+              <p>Sim, com layout próprio para tela grande. Os dados sincronizam entre celular e computador.</p>
+            </div>
+          </div>
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" id="faq-q5" aria-expanded="false" aria-controls="faq-5">
+              <span>Preciso de conta Google?</span>
+              <svg class="faq-chevron icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </button>
+            <div id="faq-5" class="faq-answer" role="region" aria-labelledby="faq-q5">
+              <p>Sim. O login é feito com Google.</p>
+            </div>
+          </div>
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" id="faq-q6" aria-expanded="false" aria-controls="faq-6">
+              <span>Como começo?</span>
+              <svg class="faq-chevron icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </button>
+            <div id="faq-6" class="faq-answer" role="region" aria-labelledby="faq-q6">
+              <p>Toque em Começar grátis, entre com sua conta Google e adicione o app à tela inicial.</p>
+            </div>
+          </div>
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" id="faq-q7" aria-expanded="false" aria-controls="faq-7">
+              <span>É grátis mesmo?</span>
+              <svg class="faq-chevron icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </button>
+            <div id="faq-7" class="faq-answer" role="region" aria-labelledby="faq-q7">
+              <p>Sim, por tempo limitado. Não pede cartão nem cadastro além da conta Google.</p>
+            </div>
+          </div>
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" id="faq-q8" aria-expanded="false" aria-controls="faq-8">
+              <span>E se eu pular um dia?</span>
+              <svg class="faq-chevron icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </button>
+            <div id="faq-8" class="faq-answer" role="region" aria-labelledby="faq-q8">
+              <p>Pode pular. O app mostra os dias em aberto e deixa você fechar até 7 dias para trás.</p>
+            </div>
+          </div>
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" id="faq-q9" aria-expanded="false" aria-controls="faq-9">
+              <span>Posso usar para o trabalho?</span>
+              <svg class="faq-chevron icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </button>
+            <div id="faq-9" class="faq-answer" role="region" aria-labelledby="faq-q9">
+              <p>Sim. Projetos com prazo e marcos, contextos e tarefas repetidas cobrem a rotina profissional. O trabalho vira um dos seus talentos.</p>
+            </div>
+          </div>
+          <!-- FAQ 10: [DEFINIR] alinhar com a política de privacidade. -->
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" id="faq-q10" aria-expanded="false" aria-controls="faq-10">
+              <span>Meus dados são privados?</span>
+              <svg class="faq-chevron icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </button>
+            <div id="faq-10" class="faq-answer" role="region" aria-labelledby="faq-q10">
+              <p>Sim. Cada conta acessa apenas os próprios dados.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA-FINAL ===== -->
+    <section id="cta-final" class="section section--xl" aria-labelledby="cta-final-title">
+      <div class="container--narrow">
+        <!-- [DEFINIR] confirmar a tradução usada pelo Ewertton (hoje ARC) -->
+        <blockquote class="verse fade-up">
+          <p>"Bem está, servo bom e fiel. Sobre o pouco foste fiel, sobre muito te colocarei."</p>
+          <cite>Mateus 25:21</cite>
+        </blockquote>
+        <h2 id="cta-final-title" class="cta-final-headline fade-up">Servo bom multiplica. Servo mau enterra. Comece hoje o seu primeiro dia.</h2>
+        <div class="cta-final-action fade-up">
+          <a href="https://remiyah-app.netlify.app" class="btn" data-app-link>Começar grátis</a>
+          <p class="cta-final-note">Gratuito por tempo limitado · Sem cartão · Entre com o Google</p>
+        </div>
+      </div>
+    </section>
 
   </main>
 
-  <!-- ===== FOOTER ===== (fatia 5) -->
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <p class="footer-brand"><strong>Remiyah</strong> · Multiplica seus talentos.</p>
+        <!-- [DEFINIR] razão social / CNPJ -->
+        <!-- [DEFINIR] e-mail de suporte -->
+        <nav class="footer-links" aria-label="Links do rodapé">
+          <!-- [DEFINIR] Termos de uso: <a href="«URL dos termos»">Termos de uso</a> -->
+          <!-- [DEFINIR] Política de privacidade: <a href="«URL da política»">Política de privacidade</a> -->
+          <a href="https://remiyah-app.netlify.app" data-app-link>Entrar</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
 
   <!-- ===== STICKY CTA (mobile) ===== -->
   <div class="sticky-bar" role="complementary" aria-label="Chamada para ação fixa">

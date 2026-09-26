@@ -698,29 +698,120 @@
   }
 }
 
-/* ===== FAQ (accordion) ===== */
-.faq-headline {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-  line-height: 1.15;
-  margin-bottom: 2rem;
+/* ===== Oferta ===== */
+.offer-card {
+  margin-top: 2rem;
+  padding: 1.5rem 1.25rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
 }
 
-.faq-list {
+@media (min-width: 768px) {
+  .offer-card {
+    padding: 2rem;
+  }
+}
+
+.offer-list {
+  list-style: none;
   display: flex;
   flex-direction: column;
   gap: .75rem;
 }
 
+.offer-item {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: .75rem;
+  line-height: 1.5;
+}
+
+.offer-item .icon {
+  margin-top: .15rem;
+  color: var(--muted-foreground);
+}
+
+.offer-steps-label {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  margin-top: 1rem;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  align-items: center;
+  gap: .875rem;
+  line-height: 1.5;
+}
+
+.step-num {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.step strong {
+  font-weight: 600;
+}
+
+.offer-cta {
+  margin-top: 2rem;
+}
+
+.offer-cta .btn {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .offer-cta .btn {
+    width: auto;
+  }
+}
+
+.offer-note {
+  margin-top: .875rem;
+  font-size: .85rem;
+  color: var(--muted-foreground);
+}
+
+/* ===== FAQ (accordion) ===== */
+#faq .label {
+  margin-bottom: 1.25rem;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: .625rem;
+}
+
 .faq-item {
   background: var(--card);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
 }
 
 .faq-question {
   width: 100%;
+  min-height: 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -733,8 +824,13 @@
   font-weight: 600;
   font-size: 1rem;
   color: var(--foreground);
-  padding: 1.1rem 1.25rem;
+  padding: 1rem 1.25rem;
   line-height: 1.4;
+  transition: background-color var(--transition);
+}
+
+.faq-question:hover {
+  background: var(--muted);
 }
 
 .faq-chevron {
@@ -767,35 +863,69 @@
 /* ===== CTA final ===== */
 #cta-final {
   background: var(--card);
+  border-top: 1px solid var(--border);
   text-align: center;
 }
 
-.cta-final-headline {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(1.8rem, 4.5vw, 3rem);
-  line-height: 1.1;
-  margin-bottom: 1rem;
+/* Citação em serifa; o dourado fica só na referência (além do botão) */
+.verse {
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.cta-final-body {
+.verse p {
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 3.4vw, 1.75rem);
+  line-height: 1.45;
+  color: var(--foreground);
+  text-wrap: balance;
+}
+
+.verse cite {
+  display: block;
+  margin-top: .875rem;
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: .85rem;
+  font-weight: 500;
+  letter-spacing: .04em;
+  color: var(--brand);
+}
+
+.cta-final-headline {
+  max-width: 640px;
+  margin: 3rem auto 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  text-wrap: balance;
+}
+
+.cta-final-action {
+  margin-top: 2rem;
+}
+
+.cta-final-note {
+  margin-top: .875rem;
+  font-size: .85rem;
   color: var(--muted-foreground);
-  max-width: 540px;
-  margin: 0 auto 1.75rem;
 }
 
 /* ===== Footer ===== */
-footer {
+.site-footer {
   background: var(--background);
-  color: var(--foreground);
+  color: var(--muted-foreground);
   border-top: 1px solid var(--border);
-  padding-block: 2.5rem;
+  padding-block: 2rem;
+  font-size: .9rem;
 }
 
 .footer-inner {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: .5rem;
   align-items: center;
   text-align: center;
 }
@@ -808,10 +938,9 @@ footer {
   }
 }
 
-.footer-brand {
-  font-family: var(--font-display);
+.footer-brand strong {
   font-weight: 600;
-  letter-spacing: .04em;
+  color: var(--foreground);
 }
 
 .footer-links {
@@ -822,9 +951,12 @@ footer {
 }
 
 .footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: var(--muted-foreground);
   text-decoration: none;
-  font-size: .9rem;
+  transition: color var(--transition);
 }
 
 .footer-links a:hover {
